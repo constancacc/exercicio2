@@ -1,0 +1,55 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    position: relative;
+
+    font-family: 'Nunito', sans-serif;
+    
+}
+
+main{
+    position: relative;
+    margin: auto;
+
+    width: 90vw;
+
+    column-count: 4;
+    column-gap: 3.2vw;
+
+    padding: 2vw;
+    
+
+}
+
+img{
+    width:20vw;
+}
+
+.item{
+    width:20vw;
+    height: auto;
+    display: inline-block;
+    margin-bottom: 1vw;
+
+}
+h3,h4,h6{
+    all: none;
+    margin: 0.2vw 0;
+    
+}
+
+
+
+h6{
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9vw;
+
+    color: white;
+    background-color: blueviolet;
+    display: inline-block;
+    padding: 0.2vw 0.5vw;
+    border-radius: 1vw;
+}

@@ -23,23 +23,27 @@ function Painting(json,i){
     
 
     json.data.forEach(function(rest){
+        let item = document.createElement("div");
+        item.classList.add("item");
 
         let art = document.createElement("img");
         art.src= "https://www.artic.edu/iiif/2/"+rest.image_id+"/full/843,/0/default.jpg";
 
-        let title = document.createElement("h5");
-        title.innerText="título da obra:" + rest.title;
+        let title = document.createElement("h3");
+        title.innerText= rest.title;
 
-        let artist = document.createElement("h5");
-        artist.innerText="artista:" + rest.artist_display;
+        let artist = document.createElement("h4");
+        artist.innerText= rest.artist_title;
 
-        let artwork_type = document.createElement("h5");
-        artwork_type.innerText="Tipo de Arte:" + rest.artwork_type_title;
+        let artwork_type = document.createElement("h6");
+        artwork_type.innerText= rest.artwork_type_title;
 
-        container.appendChild(art);
-        container.appendChild(title);
-        container.appendChild(artist);
-        container.appendChild(artwork_type);
+        item.appendChild(art);
+        item.appendChild(title);
+        item.appendChild(artist);
+        item.appendChild(artwork_type);
+
+        container.appendChild(item);
     });
 
     return container;
