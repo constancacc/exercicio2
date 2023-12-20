@@ -1,13 +1,10 @@
-/*async function getArt() 
-{
-  let response = await fetch(`https://api.artic.edu/api/v1/artworks?ids=208131,240935,142595,120300,13454,151363,102611,191556,117266,137125,126414&fields=id,title,image_id`);
-  let data = await response.json()
-  return data;
-}
 
-getArt()
-  .then(data => console.log(data)); */
+  
 
+  
+  
+  
+  /*PESQUISA DE OBRAS*/
   let obras = [];
   let searchinput= document.querySelector("#data-search");
 
@@ -23,6 +20,7 @@ getArt()
 
   });
 
+  /*IR BUSCAR A API*/
   fetch("https://api.artic.edu/api/v1/artworks")
   .then(function (response) {
       return response.json();
@@ -52,7 +50,17 @@ function Painting(json){
         let artwork_type = document.createElement("h6");
         artwork_type.innerText= rest.artwork_type_title;
 
-        item.appendChild(art);
+        if (rest.image_id === null){
+          let img_indisponivel = document.createElement("h3");
+          img_indisponivel.style.color = "red";
+          img_indisponivel.innerText = "imagem indisponivel";
+          
+          item.appendChild(img_indisponivel);
+
+        }else{
+          item.appendChild(art);
+        }
+
         item.appendChild(title);
         item.appendChild(artist);
         item.appendChild(artwork_type);
@@ -64,4 +72,14 @@ function Painting(json){
 
     return container;
 }
+
+
+let ascendente = document.querySelector("#asc");
+
+ascendente.addEventListener('click', function(){
+  console.log("e sports to the game");
+}
+
+);
+
 
