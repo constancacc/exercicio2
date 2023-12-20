@@ -18,7 +18,8 @@
 
 
 let ascendente = document.querySelector("#asc");
-let datas = {};
+let datas = [];
+
 
 ascendente.addEventListener('click', function(){
 
@@ -26,7 +27,7 @@ ascendente.addEventListener('click', function(){
   item.innerHTML=''; 
 
   datas.sort(function(a, b) {
-    return a.year - b.year;
+    return a.ano - b.ano;
   });
   
   console.log(datas);
