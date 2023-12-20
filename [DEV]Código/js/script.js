@@ -1,9 +1,4 @@
 
-  
-
-  
-  
-  
   /*PESQUISA DE OBRAS*/
   let obras = [];
   let searchinput= document.querySelector("#data-search");
@@ -20,6 +15,24 @@
 
   });
 
+
+
+let ascendente = document.querySelector("#asc");
+let datas = {};
+
+ascendente.addEventListener('click', function(){
+
+  const item = document.querySelector("main");
+  item.innerHTML=''; 
+
+  datas.sort(function(a, b) {
+    return a.year - b.year;
+  });
+  
+  console.log(datas);
+});
+
+
   /*IR BUSCAR A API*/
   fetch("https://api.artic.edu/api/v1/artworks")
   .then(function (response) {
@@ -27,6 +40,7 @@
   }).then(function (json) {
     document.body.appendChild(Painting(json));
     console.log(json)
+    
 });
 
 function Painting(json){
@@ -50,6 +64,7 @@ function Painting(json){
         let artwork_type = document.createElement("h6");
         artwork_type.innerText= rest.artwork_type_title;
 
+        /*se não houver imagem disponivel*/
         if (rest.image_id === null){
           let img_indisponivel = document.createElement("h3");
           img_indisponivel.style.color = "red";
@@ -70,16 +85,11 @@ function Painting(json){
         return {titulo: rest.title, artista: rest.artist_title, art: rest.artwork_type_title, element: item};
     });
 
+
+    datas =  json.data.map(function(rest){
+        return { ano: rest.date_end}
+
+    });
+
     return container;
-}
-
-
-let ascendente = document.querySelector("#asc");
-
-ascendente.addEventListener('click', function(){
-  console.log("e sports to the game");
-}
-
-);
-
-
+};
