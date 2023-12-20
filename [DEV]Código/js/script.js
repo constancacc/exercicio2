@@ -8,21 +8,35 @@
 getArt()
   .then(data => console.log(data)); */
 
+  let obras = [];
+  let searchinput= document.querySelector("#data-search");
+
+  searchinput.addEventListener("input", function(e){
+
+    let value = e.target.value.toLowerCase();
+    console.log(obras);
+
+    obras.forEach(obras =>{
+      let pesquisado =  obras.titulo.toLowerCase().includes(value) || obras.art.toLowerCase().includes(value) || obras.artista.toLowerCase().includes(value);
+      obras.element.classList.toggle("hide", !pesquisado);
+    })
+
+  });
 
   fetch("https://api.artic.edu/api/v1/artworks")
   .then(function (response) {
       return response.json();
   }).then(function (json) {
-    document.body.appendChild(Painting(json,0));
+    document.body.appendChild(Painting(json));
     console.log(json)
 });
 
-function Painting(json,i){
+function Painting(json){
 
     let container = document.createElement("main");
     
 
-    json.data.forEach(function(rest){
+   obras =  json.data.map(function(rest){
         let item = document.createElement("div");
         item.classList.add("item");
 
@@ -44,6 +58,8 @@ function Painting(json,i){
         item.appendChild(artwork_type);
 
         container.appendChild(item);
+
+        return {titulo: rest.title, artista: rest.artist_title, art: rest.artwork_type_title, element: item};
     });
 
     return container;
