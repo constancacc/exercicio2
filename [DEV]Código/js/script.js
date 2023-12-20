@@ -16,7 +16,7 @@
   });
 
 
-
+/*ORDEM ASCENDENTE*/
 let ascendente = document.querySelector("#asc");
 let datas = [];
 
