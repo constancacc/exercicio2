@@ -1,6 +1,6 @@
 # enunciado
 
-Selecionada uma Web API e criar uma página para a respectiva consulta.
+Selecionar uma Web API e criar uma página para a respectiva consulta.
  
 Esta página deverá disponibilizar as seguintes *funcionalidades*:
 - Apresentação geral dos resultados da API (ex. lista de notícias, livros, obras de arte, etc.);
