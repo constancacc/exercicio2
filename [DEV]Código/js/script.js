@@ -62,7 +62,7 @@ class Obra{
 
         let artist = document.createElement("h5");
         artist.innerText= artistName + " | " + artYear ;
-
+        
 
         let artwork_type = document.createElement("h6");
         artwork_type.innerText = tag;
