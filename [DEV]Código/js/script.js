@@ -1,3 +1,22 @@
+
+
+  /*PESQUISA DE OBRAS*/
+  let pesquisa = [];
+  let searchinput= document.querySelector("#data-search");
+
+
+  searchinput.addEventListener("input", function(e){
+
+    let value = e.target.value.toLowerCase();
+
+   
+    pesquisa.forEach((pesquisa) => {
+      let pesquisado =  pesquisa.titulo.toLowerCase().includes(value) || pesquisa.art.toLowerCase().includes(value)
+      pesquisa.element.classList.toggle("hide", !pesquisado);
+
+    });
+  });
+
 class App {
     constructor(){
         this._onJsonReady = this._onJsonReady.bind(this);
@@ -33,7 +52,6 @@ class App {
         container.innerHTML = '';
         
         for(const info of this.obras){
-        
             const obra = new Obra(container, info.image_id, 
                 info.title, info.artist_title, 
                 info.artwork_type_title, info.date_end);
@@ -50,7 +68,6 @@ class App {
 
 class Obra{
     constructor (containerElement, imageID, artTitle, artistName, tag, artYear){
-       
         let item = document.createElement("div");
         item.classList.add("item");
 
@@ -62,7 +79,7 @@ class Obra{
 
         let artist = document.createElement("h5");
         artist.innerText= artistName + " | " + artYear ;
-        
+
 
         let artwork_type = document.createElement("h6");
         artwork_type.innerText = tag;
@@ -71,9 +88,12 @@ class Obra{
         item.appendChild(title);
         item.appendChild(artist);
         item.appendChild(artwork_type);
-        
-       
+
         containerElement.append(item);
+
+        pesquisa.push({titulo: artTitle, artista: artistName, art: tag, element: item});
+        console.log(pesquisa);
+
     } 
 }
 
