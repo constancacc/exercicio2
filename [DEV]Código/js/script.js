@@ -1,98 +1,81 @@
+class App {
+    constructor(){
+        this._onJsonReady = this._onJsonReady.bind(this);
+        this._onAscClick = this._onAscClick.bind(this);
 
-  /*PESQUISA DE OBRAS*/
-  let obras = [];
-  let searchinput= document.querySelector("#data-search");
+        this.obras = {};
 
+        const ascButton = document.querySelector('#asc');
+        ascButton.addEventListener('click', this._onAscClick);
+    }
 
-  searchinput.addEventListener("input", function(e){
+    _onAscClick(){
+        this.obras.sort(function (a,b){
+            return a.date_end - b.date_end;
+        });
+        
+        this._renderObras();
+    }
 
-    let value = e.target.value.toLowerCase();
+    loadObras(){
+        fetch("https://api.artic.edu/api/v1/artworks")
+        .then(this._onResponse)
+        .then (this._onJsonReady);
+    }
 
-    console.log(obras[11]);
-   
-    obras.forEach((obras) => {
-      let pesquisado =  obras.titulo.toLowerCase().includes(value) || obras.art.toLowerCase().includes(value) /*|| obras.artista.toLowerCase().includes(value);--> melon-shapped o artista está a null*/
-      obras.element.classList.toggle("hide", !pesquisado);
+    _onJsonReady(json){
+        this.obras = json.data;
+        this._renderObras();
+    }
 
-    });
-  });
+    _renderObras(){
+        const container = document.querySelector('main');
+        container.innerHTML = '';
+        
+        for(const info of this.obras){
+        
+            const obra = new Obra(container, info.image_id, 
+                info.title, info.artist_title, 
+                info.artwork_type_title, info.date_end);
+                
+        }
+        
+    }
 
+    _onResponse(response){
+        return response.json();
+    }
 
-/*ORDEM ASCENDENTE*/
-let ascendente = document.querySelector("#asc");
-let datas = [];
+};
 
-
-ascendente.addEventListener('click', function(){
-
-  const item = document.querySelector("main");
-  item.innerHTML=''; 
-
-  datas.sort(function(a, b) {
-    return a.ano - b.ano;
-  });
-  
-  console.log(datas);
-});
-
-
-  /*IR BUSCAR A API*/
-  fetch("https://api.artic.edu/api/v1/artworks")
-  .then(function (response) {
-      return response.json();
-  }).then(function (json) {
-    document.body.appendChild(Painting(json));
-    console.log(json)
-    
-});
-
-function Painting(json){
-
-    let container = document.createElement("main");
-    
-
-   obras =  json.data.map(function(rest){
+class Obra{
+    constructor (containerElement, imageID, artTitle, artistName, tag, artYear){
+       
         let item = document.createElement("div");
         item.classList.add("item");
 
-        let art = document.createElement("img");
-        art.src= "https://www.artic.edu/iiif/2/"+rest.image_id+"/full/843,/0/default.jpg";
-
+        const image = new Image();
+        image.src = "https://www.artic.edu/iiif/2/" + imageID + "/full/843,/0/default.jpg";
+        
         let title = document.createElement("h3");
-        title.innerText= rest.title;
+        title.innerText= artTitle;
 
-        let artist = document.createElement("h4");
-        artist.innerText= rest.artist_title;
+        let artist = document.createElement("h5");
+        artist.innerText= artistName + " | " + artYear ;
+
 
         let artwork_type = document.createElement("h6");
-        artwork_type.innerText= rest.artwork_type_title;
+        artwork_type.innerText = tag;
 
-        /*se não houver imagem disponivel*/
-        if (rest.image_id === null){
-          let img_indisponivel = document.createElement("h3");
-          img_indisponivel.style.color = "red";
-          img_indisponivel.innerText = "imagem indisponivel";
-          
-          item.appendChild(img_indisponivel);
-
-        }else{
-          item.appendChild(art);
-        }
-
+        item.appendChild(image);
         item.appendChild(title);
         item.appendChild(artist);
         item.appendChild(artwork_type);
+        
+       
+        containerElement.append(item);
+    } 
+}
 
-        container.appendChild(item);
-
-        return {titulo: rest.title, artista: rest.artist_title, art: rest.artwork_type_title, element: item};
-    });
-
-
-    datas =  json.data.map(function(rest){
-        return { ano: rest.date_end}
-
-    });
-
-    return container;
-};
+const app = new App();
+app.loadObras();
