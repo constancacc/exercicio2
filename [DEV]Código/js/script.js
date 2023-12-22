@@ -3,16 +3,18 @@
   let obras = [];
   let searchinput= document.querySelector("#data-search");
 
+
   searchinput.addEventListener("input", function(e){
 
     let value = e.target.value.toLowerCase();
-    console.log(obras);
 
-    obras.forEach(obras =>{
-      let pesquisado =  obras.titulo.toLowerCase().includes(value) || obras.art.toLowerCase().includes(value) || obras.artista.toLowerCase().includes(value);
+    console.log(obras[11]);
+   
+    obras.forEach((obras) => {
+      let pesquisado =  obras.titulo.toLowerCase().includes(value) || obras.art.toLowerCase().includes(value) /*|| obras.artista.toLowerCase().includes(value);--> melon-shapped o artista está a null*/
       obras.element.classList.toggle("hide", !pesquisado);
-    })
 
+    });
   });
 
 
