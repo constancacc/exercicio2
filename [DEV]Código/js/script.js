@@ -1,22 +1,19 @@
 
+/*PESQUISA DE OBRAS*/
+let pesquisa = [];
+let searchinput= document.querySelector("#data-search");
 
-  /*PESQUISA DE OBRAS*/
-  let pesquisa = [];
-  let searchinput= document.querySelector("#data-search");
-
-
-  searchinput.addEventListener("input", function(e){
-
-    let value = e.target.value.toLowerCase();
-
+searchinput.addEventListener("input", function(e){
+let value = e.target.value.toLowerCase();
    
     pesquisa.forEach((pesquisa) => {
-      let pesquisado =  pesquisa.titulo.toLowerCase().includes(value) || pesquisa.art.toLowerCase().includes(value)
-      pesquisa.element.classList.toggle("hide", !pesquisado);
-
+        let pesquisado =  pesquisa.titulo.toLowerCase().includes(value) || pesquisa.art.toLowerCase().includes(value)
+        pesquisa.element.classList.toggle("hide", !pesquisado);
     });
-  });
+});
 
+
+/*ACEDER À API*/
 class App {
     constructor(){
         this._onJsonReady = this._onJsonReady.bind(this);
@@ -66,6 +63,7 @@ class App {
 
 };
 
+/*CONSTRUIR NO HTML*/
 class Obra{
     constructor (containerElement, imageID, artTitle, artistName, tag, artYear){
         let item = document.createElement("div");
@@ -80,7 +78,6 @@ class Obra{
         let artist = document.createElement("h5");
         artist.innerText= artistName + " | " + artYear ;
 
-
         let artwork_type = document.createElement("h6");
         artwork_type.innerText = tag;
 
@@ -92,8 +89,6 @@ class Obra{
         containerElement.append(item);
 
         pesquisa.push({titulo: artTitle, artista: artistName, art: tag, element: item});
-        console.log(pesquisa);
-
     } 
 }
 

@@ -1,3 +1,4 @@
+/*Estrutura Geral*/
 *{
     margin:0;
     padding:0;
@@ -24,6 +25,7 @@ main{
 
 }
 
+/*Dados da API*/
 img{
     width:20vw;
 }
@@ -35,12 +37,12 @@ img{
     margin-bottom: 1vw;
 
 }
+
 h3,h4,h6{
     all: none;
     margin: 0.2vw 0;
     
 }
-
 
 h6{
     font-family: 'Space Mono', monospace;
@@ -57,6 +59,8 @@ h6{
     display:none;
 }
 
+
+/*Pesquisa e Botões*/
 .search-container{
     position: relative;
     margin: auto;
@@ -65,22 +69,39 @@ h6{
     
 }
 
-input[type=text] {
+input[type=text],button,#lista{
     border: none;
     outline: none;
 
-    width: 43vw;
-    padding: 0.5vw;
+    font-family: 'Space Mono', monospace;
+
+    
     border-radius: 1vw;
 
     margin: 2vw 0 ;
-    background-color: green;
     color: white;
 
+  }
+
+  input[type=text]{
+    width: 43vw;
+    background-color: green;
+    padding:0.5vw;
   }
 
   ::placeholder{
     color: white;
-    font-family: 'Space Mono', monospace;
   }
+
+  button{
+    background-color: blueviolet;
+    padding:0.5vw;
+  }
+
+  button:hover{
+    cursor: pointer;
+    background-color: #f3f3f3;
+    color: blueviolet;
+  }
+
   
