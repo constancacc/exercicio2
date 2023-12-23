@@ -12,6 +12,9 @@ let value = e.target.value.toLowerCase();
     });
 });
 
+/*FILTRAR POR CATEGORIAS*/
+let tags = [];
+
 
 /*ACEDER À API*/
 class App {
@@ -76,19 +79,74 @@ class Obra{
         title.innerText= artTitle;
 
         let artist = document.createElement("h5");
+
+        /*caso o nome do artista esteja a null*/
+        if(artistName === null){
+            artist.innerText = artYear;
+        }else{
         artist.innerText= artistName + " | " + artYear ;
+        }
 
         let artwork_type = document.createElement("h6");
         artwork_type.innerText = tag;
 
-        item.appendChild(image);
+        /*caso o link da imagem esteja a null*/
+        let indisponivel = document.createElement("h5");
+        indisponivel.style.color = "red";
+        indisponivel.innerText = "imagem indisponivel";
+        
+        if(imageID === null){
+            item.appendChild(indisponivel);
+        }else{
+            item.appendChild(image);
+        }
+        
         item.appendChild(title);
         item.appendChild(artist);
         item.appendChild(artwork_type);
 
         containerElement.append(item);
 
-        pesquisa.push({titulo: artTitle, artista: artistName, art: tag, element: item});
+         /* array de pesquisar*/
+         pesquisa.push({titulo: artTitle, artista: artistName, art: tag, element: item});
+
+      /* array das tags*/
+        tags.push(tag);
+
+        
+        function removeDuplicates(arr) {
+            let unique = [...new Set(arr)]; // Usando Set para remover duplicatas
+            let tagsContainer = document.querySelector(".tags-container");
+        
+            // Remover todos os elementos dentro do container antes de adicionar os novos
+            tagsContainer.innerHTML = '';
+        
+            unique.forEach(element => {
+            // Criar um novo botão para cada tag única
+            let categorias = document.createElement("button");
+            categorias.classList.add("categoria");
+            categorias.value = element;
+            categorias.innerText = element;
+            
+            // Adicionar ouvinte de evento diretamente após criar o botão
+            categorias.addEventListener('click', () => {
+                let valor = categorias.value;
+                console.log(valor);
+        
+                pesquisa.forEach(pesquisa => {
+                let tag_ativa = pesquisa.art.includes(valor);
+                pesquisa.element.classList.toggle("hide", !tag_ativa);
+                });
+            });
+        
+            tagsContainer.appendChild(categorias);
+            });
+        
+            return unique;
+        }
+
+        tags = removeDuplicates(tags);
+        
     } 
 }
 
