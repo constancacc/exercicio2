@@ -105,12 +105,11 @@ input[type=text],button,#lista{
     color: blueviolet;
   }
 
-  /*--------------MOBILE----------------------
-adaptação para mobile*/
 
+/*ADAPTAÇÃO A MOBILE*/
 @media only screen and (max-width : 600px) {
 
-    /*estrutura geral*/
+/*estrutura geral*/
    main{
     column-count: 1;
     
@@ -131,8 +130,7 @@ adaptação para mobile*/
     margin:auto;
   }
 
-  /*botões e pesquisa*/
-
+/*botões e pesquisa*/
   button{
     margin: 0.5vw;
   }

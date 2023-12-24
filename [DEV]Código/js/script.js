@@ -12,7 +12,7 @@ let value = e.target.value.toLowerCase();
     });
 });
 
-/*FILTRAR POR CATEGORIAS*/
+//Array das categorias
 let tags = [];
 
 
@@ -80,7 +80,7 @@ class Obra{
 
         let artist = document.createElement("h5");
 
-        /*caso o nome do artista esteja a null*/
+        //Caso o nome do artista esteja a null
         if(artistName === null){
             artist.innerText = artYear;
         }else{
@@ -90,7 +90,7 @@ class Obra{
         let artwork_type = document.createElement("h6");
         artwork_type.innerText = tag;
 
-        /*caso o link da imagem esteja a null*/
+        //Caso o link da imagem esteja a null
         let indisponivel = document.createElement("h5");
         indisponivel.style.color = "red";
         indisponivel.innerText = "imagem indisponivel";
@@ -107,13 +107,13 @@ class Obra{
 
         containerElement.append(item);
 
-         /* array de pesquisar*/
+         //Array de pesquisar
          pesquisa.push({titulo: artTitle, artista: artistName, art: tag, element: item});
 
-      /* array das tags*/
+        //Array das tags
         tags.push(tag);
 
-        
+        /*FILTRAR POR CATEGORIAS*/
         function removeDuplicates(arr) {
             let unique = [...new Set(arr)]; // Usando Set para remover duplicatas
             let tagsContainer = document.querySelector(".tags-container");
@@ -128,7 +128,7 @@ class Obra{
             categorias.value = element;
             categorias.innerText = element;
             
-            // Adicionar ouvinte de evento diretamente após criar o botão
+            // Adicionar o Evento diretamente após criar o botão
             categorias.addEventListener('click', () => {
                 let valor = categorias.value;
                 console.log(valor);
