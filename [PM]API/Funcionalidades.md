@@ -5,7 +5,7 @@ Com a utilização da API e baseando-me no código fornecido nas aulas teóricas
 - Desenho das Obras inicialmente pela ordem que a API fornece — dentro de um *container* que tem o nome de **item** que contém a imagem da obra, o título, o ano em que a obra ficou finalizada e a respetiva tag;
 - A pesquisa de obras — feita a partir de um elemento *input[type=text]* onde aparecem as imagens em que o valor escrito nesse mesmo input está contido no título ou na tag da obra;
 - Organização de todas as obras por Ordem Cronologica — obras organizadas da data mais antiga de finalização para a mais recente;
-- Filtragem por Tags — cada tag contida no array proveniente da API é desenhada em formato de botão onde quando o utilizador clica nesse mesmo botão só ficam visiveis as obras cuja tag é igual ao valor do mesmo.
+- Filtragem por Tags — cada tag contida no array proveniente da API é desenhada em formato de botão que quando o utilizador clica nesse mesmo botão só ficam visiveis as obras cuja tag é igual ao valor do mesmo.
 
 ## Difiuldades Encontradas
 
